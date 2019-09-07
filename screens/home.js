@@ -51,12 +51,32 @@ export default class Home extends React.Component{
           renderItem={({item}) => {
             contact = JSON.parse(item[1]);
             return(
-              <TouchableOpacity>
-                <Text>{contact.fname}</Text>
+              <TouchableOpacity
+                onPress = {() => {
+                  this.props.navigation.navigate("View", {
+                    key : item[0].toString()
+                  })
+                }}
+              >
+                <Card style={styles.listItem}>
+                  <View style={styles.iconContainer}>
+                    <Text style={styles.contactIcon}>
+                      {contact.fname[0].toUpperCase()}
+                    </Text>
+                  </View>
+                  <View style={styles.infoContainer}>
+                    <Text style={styles.infoText}>
+                      {contact.fname} {contact.lname}
+                    </Text>
+                    <Text style={styles.infoText}>
+                      {contact.phone}
+                    </Text>
+                  </View>
+                </Card>
               </TouchableOpacity>
             );
           }}
-          keyExtractor={(item) => item[0].toString()} // unique key to the list of the data
+          keyExtractor={(item,index) => item[0].toString()} // unique key to the list of the data
         />
 
         <TouchableOpacity
@@ -71,6 +91,7 @@ export default class Home extends React.Component{
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {

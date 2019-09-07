@@ -36,7 +36,7 @@ export default class AddNewContactScreen extends React.Component{
           address : this.state.address,
         }
 
-        await AsyncStorage.setItem('key',
+        await AsyncStorage.setItem(Date.now().toString(),
         JSON.stringify(contact)
         )
         .then(() => {
